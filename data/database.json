@@ -1,6 +1,6 @@
 {
   "name": "Game Rental Shop",
-  "description": "shop's description",
+  "description": "Rental shop with older games for older systems.",
   "games": [
     {
       "id": 0,
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "name": "Battlefield: Bad Company"
+      "name": "Battlefield 2: Modern Combat"
     }
   ],
   "users": [
