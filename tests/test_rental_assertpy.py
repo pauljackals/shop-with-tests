@@ -14,6 +14,9 @@ class TestRentalAssertPy(unittest.TestCase):
     def test_load_database_no_file(self):
         assert_that(self.rental.load_database).raises(FileNotFoundError).when_called_with('test')
 
+    def test_load_database_wrong_type(self):
+        assert_that(self.rental.load_database).raises(TypeError).when_called_with(23)
+
     def tearDown(self):
         self.rental = None
 
