@@ -1,5 +1,0 @@
-{
-  "tests_special": {
-    "test_load_database": {"min_length": 1}
-  }
-}
