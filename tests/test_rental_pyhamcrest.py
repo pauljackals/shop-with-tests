@@ -11,6 +11,9 @@ class TestRentalPyHamcrest(unittest.TestCase):
         self.rental.load_database()
         assert_that(len(self.rental.database), greater_than(0))
 
+    def test_load_database_no_file(self):
+        assert_that(calling(self.rental.load_database).with_args('test'), raises(FileNotFoundError))
+
     def tearDown(self):
         self.rental = None
 

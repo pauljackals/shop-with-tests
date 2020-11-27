@@ -11,6 +11,9 @@ class TestRentalAssertPy(unittest.TestCase):
         self.rental.load_database()
         assert_that(len(self.rental.database)).is_greater_than(0)
 
+    def test_load_database_no_file(self):
+        assert_that(self.rental.load_database).raises(FileNotFoundError).when_called_with('test')
+
     def tearDown(self):
         self.rental = None
 
