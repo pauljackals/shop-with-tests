@@ -1,6 +1,5 @@
 import json
 import os
-import datetime
 
 
 class Rental:
@@ -20,3 +19,6 @@ class Rental:
         with open('../data/database_copy.json', 'w') as file:
             file.write(json.dumps(self._database))
         return True
+
+    def get_user_reservations(self, id_user):
+        return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
