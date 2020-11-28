@@ -53,6 +53,8 @@ class Rental:
         date_time_from, date_time_to = list(map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string]))
         if date_time_from.minute % 30 != 0 or date_time_to.minute % 30 != 0:
             raise ValueError('Both dates must be rounded to full hours or half (:00/:30)')
+        if (date_time_to - date_time_from).total_seconds() <= 0:
+            raise ValueError('End date must be later than start date')
 
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
