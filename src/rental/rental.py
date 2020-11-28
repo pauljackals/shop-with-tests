@@ -24,6 +24,8 @@ class Rental:
     def get_user_reservations(self, id_user):
         if type(id_user) != str:
             raise TypeError('User ID must be a string')
+        if id_user not in list(map(lambda user: user['id'], self._database['users'])):
+            raise LookupError('No such user')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
 
     def create_reservation(self, user_id, game_id, date_time_from_string, date_time_to_string):
