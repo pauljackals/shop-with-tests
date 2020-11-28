@@ -200,7 +200,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
             calling(self.rental.create_reservation).with_args(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
-                '2020-12-19 14:30',
+                '2020-12-20 14:30',
                 '2020-12-22 13:00'
             ),
             raises(ValueError)
