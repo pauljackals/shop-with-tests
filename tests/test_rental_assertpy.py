@@ -8,8 +8,7 @@ class TestRentalAssertPy(unittest.TestCase):
         self.rental = Rental()
 
     def test_load_database(self):
-        self.rental.load_database()
-        assert_that(len(self.rental.database)).is_greater_than(0)
+        assert_that(self.rental.load_database()).is_true()
 
     def test_load_database_no_file(self):
         assert_that(self.rental.load_database).raises(FileNotFoundError).when_called_with('test')
