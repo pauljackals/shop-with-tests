@@ -59,7 +59,8 @@ class Rental:
         weekday_from = self._database['open_hours'][date_time_from.weekday()]
         weekday_to = self._database['open_hours'][date_time_to.weekday()]
         if not weekday_from['is_open']\
-                or not weekday_to['is_open']:
+                or not weekday_to['is_open']\
+                or (datetime.timedelta(hours=date_time_from.hour, minutes=date_time_from.minute) - datetime.timedelta(hours=weekday_from['open'])).total_seconds() < 0:
             raise ValueError('Rental shop is closed during this time')
 
         new_reservation_id = str(uuid.uuid4())
