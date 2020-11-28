@@ -42,8 +42,11 @@ class Rental:
 
         if not re.search('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) ([0-1][0-9]|2[0-3]):[0-5][0-9]$', date_time_to_string):
             raise ValueError('Wrong date syntax')
-        month_to, day_to = date_time_to_string.split(' ')[0].split('-')[1:]
-        if month_to == '02' and int(day_to) > 28\
+        year_to, month_to, day_to = date_time_to_string.split(' ')[0].split('-')
+        leap_modifier = 0
+        if (int(year_to) % 400 == 0) or ((int(year_to) % 4 == 0) and (int(year_to) % 100 != 0)):
+            leap_modifier += 1
+        if month_to == '02' and int(day_to) > (28 + leap_modifier)\
                 or month_to in ['04', '06', '09', '11'] and day_to == '31':
             raise ValueError('No such day in provided month')
 
