@@ -36,6 +36,10 @@ class TestRentalAssertPy(unittest.TestCase):
     def test_get_user_reservations_wrong_type(self):
         assert_that(self.rental.get_user_reservations).raises(TypeError).when_called_with(123)
 
+    def test_get_user_reservations_no_user(self):
+        self.rental.load_database()
+        assert_that(self.rental.get_user_reservations).raises(LookupError).when_called_with('test')
+
     def test_create_reservation(self):
         self.rental.load_database()
         assert_that(
