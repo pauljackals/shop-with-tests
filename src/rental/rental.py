@@ -41,6 +41,9 @@ class Rental:
                     or month_string in ['04', '06', '09', '11'] and day_string == '31':
                 raise ValueError('No such day in provided month')
 
+        if type(user_id) != str:
+            raise TypeError('User ID must be a string')
+
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
             {
