@@ -59,6 +59,14 @@ class TestRentalAssertPy(unittest.TestCase):
             '2020-12-21 13:00'
         )
 
+    def test_create_reservation_wrong_date_from_wrong_day_in_month(self):
+        assert_that(self.rental.create_reservation).raises(ValueError).when_called_with(
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-11-31 14:30',
+            '2020-12-21 13:00'
+        )
+
     def tearDown(self):
         self.rental = None
 
