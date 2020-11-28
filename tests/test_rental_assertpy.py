@@ -121,6 +121,14 @@ class TestRentalAssertPy(unittest.TestCase):
             ), version=4)
         ).is_instance_of(uuid.UUID)
 
+    def test_create_reservation_wrong_user_type(self):
+        assert_that(self.rental.create_reservation).raises(TypeError).when_called_with(
+            34,
+            1,
+            '2020-12-19 14:30',
+            '2020-12-21 13:00'
+        )
+
     def tearDown(self):
         self.rental = None
 

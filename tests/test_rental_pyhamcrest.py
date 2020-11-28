@@ -142,6 +142,17 @@ class TestRentalPyHamcrest(unittest.TestCase):
             instance_of(uuid.UUID)
         )
 
+    def test_create_reservation_wrong_user_type(self):
+        assert_that(
+            calling(self.rental.create_reservation).with_args(
+                34,
+                1,
+                '2020-12-19 14:30',
+                '2020-12-21 13:00'
+            ),
+            raises(TypeError)
+        )
+
     def tearDown(self):
         self.rental = None
 
