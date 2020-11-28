@@ -32,6 +32,9 @@ class Rental:
     def create_reservation(self, user_id, game_id, date_time_from_string, date_time_to_string):
         if not re.search('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) ([0-1][0-9]|2[0-3]):[0-5][0-9]$', date_time_from_string):
             raise ValueError('Wrong date syntax')
+        month_from, day_from = date_time_from_string.split(' ')[0].split('-')[1:]
+        if month_from in ['04', '06', '09', '11'] and day_from == '31':
+            raise ValueError('No such day in provided month')
 
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
