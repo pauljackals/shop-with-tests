@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 
 
 class Rental:
@@ -24,3 +25,16 @@ class Rental:
         if type(id_user) != str:
             raise TypeError('User ID must be a string')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
+
+    def create_reservation(self, user_id, game_id, date_time_from_string, date_time_to_string):
+        new_reservation_id = str(uuid.uuid4())
+        self._database['reservations'].append(
+            {
+                'id': new_reservation_id,
+                'user': user_id,
+                'game': game_id,
+                'from': date_time_from_string,
+                'to': date_time_to_string
+            }
+        )
+        return new_reservation_id
