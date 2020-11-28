@@ -2,6 +2,7 @@ import json
 import os
 import uuid
 import re
+import datetime
 
 
 class Rental:
@@ -48,6 +49,10 @@ class Rental:
             raise TypeError('User ID must be a string')
         if user_id not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
+
+        date_time_from = datetime.datetime.strptime(date_time_from_string, '%Y-%m-%d %H:%M')
+        if date_time_from.minute % 30 != 0:
+            raise ValueError('Date must be rounded to full hour or half (:00/:30)')
 
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
