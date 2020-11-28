@@ -68,6 +68,12 @@ class Rental:
                 or weekday_timedelta(date_time_to, weekday_to['close']) > 0:
             raise ValueError('Rental shop is closed during this time')
 
+        for reservation in filter(lambda reservation_lambda: reservation_lambda['game'] == game_id, self._database['reservations']):
+            reservation_date_from = datetime.datetime.strptime(reservation['from'], '%Y-%m-%d %H:%M')
+            reservation_date_to = datetime.datetime.strptime(reservation['to'], '%Y-%m-%d %H:%M')
+            if (date_time_from - reservation_date_from).total_seconds() >= 0 > (date_time_from - reservation_date_to).total_seconds():
+                raise ValueError('Game is already reserved during this time')
+
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
             {
