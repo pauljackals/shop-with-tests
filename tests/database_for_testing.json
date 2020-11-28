@@ -4,15 +4,23 @@
   "games": [
     {
       "id": 0,
-      "name": "Call of Duty: Finest Hour"
+      "name": "Call of Duty: Finest Hour",
+      "system": 0
     },
     {
       "id": 1,
-      "name": "Warriors of Might and Magic"
+      "name": "Warriors of Might and Magic",
+      "system": 1
     },
     {
       "id": 2,
-      "name": "Battlefield 2: Modern Combat"
+      "name": "Battlefield 2: Modern Combat",
+      "system": 0
+    },
+    {
+      "id": 3,
+      "name": "Far Cry: Predator",
+      "system": 2
     }
   ],
   "users": [
@@ -33,6 +41,21 @@
       "from": "2020-12-15 13:00",
       "to": "2020-12-19 14:30"
     }
+  ],
+  "systems":[
+    {
+      "id": 0,
+      "name": "PlayStation 2"
+    },
+    {
+      "id": 1,
+      "name": "PlayStation 1"
+    },
+    {
+      "id": 2,
+      "name": "Xbox 360"
+    }
+
   ],
   "open_hours": [
     {
