@@ -70,7 +70,8 @@ class Rental:
 
         for reservation in filter(lambda reservation_lambda: reservation_lambda['game'] == game_id, self._database['reservations']):
             reservation_date_from, reservation_date_to = map(lambda from_to: datetime.datetime.strptime(reservation[from_to], '%Y-%m-%d %H:%M'), ['from', 'to'])
-            if (date_time_from - reservation_date_from).total_seconds() >= 0 > (date_time_from - reservation_date_to).total_seconds():
+            if ((date_time_from - reservation_date_from).total_seconds() >= 0 > (date_time_from - reservation_date_to).total_seconds())\
+                    or ((date_time_to - reservation_date_from).total_seconds() > 0 >= (date_time_to - reservation_date_to).total_seconds()):
                 raise ValueError('Game is already reserved during this time')
 
         new_reservation_id = str(uuid.uuid4())
