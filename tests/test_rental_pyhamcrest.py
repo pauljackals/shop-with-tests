@@ -1,6 +1,7 @@
 import unittest
 from hamcrest import *
 from rental.rental import Rental
+import uuid
 
 
 class TestRentalPyHamcrest(unittest.TestCase):
@@ -34,6 +35,18 @@ class TestRentalPyHamcrest(unittest.TestCase):
 
     def test_get_user_reservations_wrong_type(self):
         assert_that(calling(self.rental.get_user_reservations).with_args(123), raises(TypeError))
+
+    def test_create_reservation(self):
+        self.rental.load_database()
+        assert_that(
+            uuid.UUID(self.rental.create_reservation(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2020-12-19 14:30',
+                '2020-12-21 13:00'
+            ), version=4),
+            instance_of(uuid.UUID)
+        )
 
     def tearDown(self):
         self.rental = None
