@@ -79,8 +79,8 @@ class TestRentalPyHamcrest(unittest.TestCase):
             calling(self.rental.create_reservation).with_args(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
-                '2020-02-29 14:30',
-                '2020-12-21 13:00'
+                '2021-02-29 14:30',
+                '2021-12-21 13:00'
             ),
             raises(ValueError)
         )
@@ -91,7 +91,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
             uuid.UUID(self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
-                '2024-2-29 14:30',
+                '2024-02-29 14:30',
                 '2024-12-21 13:00'
             ), version=4),
             instance_of(uuid.UUID)
