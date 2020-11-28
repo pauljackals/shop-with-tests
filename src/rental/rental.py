@@ -50,8 +50,7 @@ class Rental:
         if user_id not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
 
-        date_time_from = datetime.datetime.strptime(date_time_from_string, '%Y-%m-%d %H:%M')
-        date_time_to = datetime.datetime.strptime(date_time_to_string, '%Y-%m-%d %H:%M')
+        date_time_from, date_time_to = list(map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string]))
         if date_time_from.minute % 30 != 0 or date_time_to.minute % 30 != 0:
             raise ValueError('Both dates must be rounded to full hours or half (:00/:30)')
 
