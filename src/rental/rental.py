@@ -64,7 +64,8 @@ class Rental:
                 or not weekday_to['is_open']\
                 or weekday_timedelta(date_time_from, weekday_from['open']) < 0\
                 or weekday_timedelta(date_time_from, weekday_from['close']) > 0\
-                or weekday_timedelta(date_time_to, weekday_to['open']) < 0:
+                or weekday_timedelta(date_time_to, weekday_to['open']) < 0 \
+                or weekday_timedelta(date_time_to, weekday_to['close']) > 0:
             raise ValueError('Rental shop is closed during this time')
 
         new_reservation_id = str(uuid.uuid4())
