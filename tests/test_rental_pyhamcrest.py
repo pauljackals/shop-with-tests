@@ -228,6 +228,17 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(ValueError)
         )
 
+    def test_create_reservation_error_date_from_open_hours_after(self):
+        assert_that(
+            calling(self.rental.create_reservation).with_args(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2020-12-18 21:00',
+                '2020-12-19 13:00'
+            ),
+            raises(ValueError)
+        )
+
     def tearDown(self):
         self.rental = None
 
