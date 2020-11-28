@@ -29,7 +29,7 @@ class Rental:
     def get_user_reservations(self, id_user):
         if type(id_user) != str:
             raise TypeError('User ID must be a string')
-        if id_user not in list(map(lambda user: user['id'], self._database['users'])):
+        if id_user not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
 
@@ -50,18 +50,20 @@ class Rental:
         if user_id not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
 
-        date_time_from, date_time_to = list(map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string]))
+        date_time_from, date_time_to = map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string])
         if date_time_from.minute % 30 != 0 or date_time_to.minute % 30 != 0:
             raise ValueError('Both dates must be rounded to full hours or half (:00/:30)')
         if (date_time_to - date_time_from).total_seconds() <= 0:
             raise ValueError('End date must be later than start date')
 
-        weekday_from = self._database['open_hours'][date_time_from.weekday()]
-        weekday_to = self._database['open_hours'][date_time_to.weekday()]
+        weekday_from, weekday_to = map(lambda date_time: self._database['open_hours'][date_time.weekday()], [date_time_from, date_time_to])
+
+        def weekday_timedelta(date_time, weekday_open_close):
+            return (datetime.timedelta(hours=date_time.hour, minutes=date_time.minute) - datetime.timedelta(hours=weekday_open_close)).total_seconds()
         if not weekday_from['is_open']\
                 or not weekday_to['is_open']\
-                or (datetime.timedelta(hours=date_time_from.hour, minutes=date_time_from.minute) - datetime.timedelta(hours=weekday_from['open'])).total_seconds() < 0\
-                or (datetime.timedelta(hours=date_time_from.hour, minutes=date_time_from.minute) - datetime.timedelta(hours=weekday_from['close'])).total_seconds() > 0:
+                or weekday_timedelta(date_time_from, weekday_from['open']) < 0\
+                or weekday_timedelta(date_time_from, weekday_from['close']) > 0:
             raise ValueError('Rental shop is closed during this time')
 
         new_reservation_id = str(uuid.uuid4())
