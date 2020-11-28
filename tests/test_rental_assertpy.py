@@ -16,6 +16,9 @@ class TestRentalAssertPy(unittest.TestCase):
     def test_load_database_wrong_type(self):
         assert_that(self.rental.load_database).raises(TypeError).when_called_with(23)
 
+    def test_save_database(self):
+        assert_that(self.rental.save_database()).is_true()
+
     def tearDown(self):
         self.rental = None
 
