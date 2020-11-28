@@ -32,6 +32,9 @@ class TestRentalAssertPy(unittest.TestCase):
         self.rental.load_database()
         assert_that(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf')).contains_only(*reservations)
 
+    def test_get_user_reservations_wrong_type(self):
+        assert_that(self.rental.get_user_reservations).raises(TypeError).when_called_with(123)
+
     def tearDown(self):
         self.rental = None
 

@@ -32,6 +32,9 @@ class TestRentalPyHamcrest(unittest.TestCase):
         self.rental.load_database()
         assert_that(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf'), contains_inanyorder(*reservations))
 
+    def test_get_user_reservations_wrong_type(self):
+        assert_that(calling(self.rental.get_user_reservations).with_args(123), raises(TypeError))
+
     def tearDown(self):
         self.rental = None
 
