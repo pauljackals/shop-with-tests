@@ -43,6 +43,8 @@ class Rental:
 
         if type(user_id) != str:
             raise TypeError('User ID must be a string')
+        if user_id not in map(lambda user: user['id'], self._database['users']):
+            raise LookupError('No such user')
 
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
