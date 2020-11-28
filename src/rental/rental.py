@@ -49,6 +49,8 @@ class Rental:
             raise TypeError('User ID must be a string')
         if user_id not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
+        if type(game_id) != int:
+            raise TypeError('Game ID must be an integer')
 
         date_time_from, date_time_to = map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string])
         if date_time_from.minute % 30 != 0 or date_time_to.minute % 30 != 0:
