@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 
 
 class Rental:
@@ -13,4 +14,9 @@ class Rental:
             raise FileNotFoundError("Database doesn't exist")
         with open('../data/' + database_file) as file:
             self._database = json.loads(file.read())
+        return True
+
+    def save_database(self):
+        with open('../data/database_copy.json', 'w') as file:
+            file.write(json.dumps(self._database))
         return True
