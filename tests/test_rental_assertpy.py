@@ -129,6 +129,14 @@ class TestRentalAssertPy(unittest.TestCase):
             '2020-12-21 13:00'
         )
 
+    def test_create_reservation_no_user(self):
+        assert_that(self.rental.create_reservation).raises(LookupError).when_called_with(
+            'test',
+            1,
+            '2020-12-19 14:30',
+            '2020-12-21 13:00'
+        )
+
     def tearDown(self):
         self.rental = None
 
