@@ -173,6 +173,17 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(TypeError)
         )
 
+    def test_create_reservation_error_no_game(self):
+        assert_that(
+            calling(self.rental.create_reservation).with_args(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                999,
+                '2020-12-19 14:30',
+                '2020-12-21 13:00'
+            ),
+            raises(TypeError)
+        )
+
     def test_create_reservation_minute_error_date_from(self):
         assert_that(
             calling(self.rental.create_reservation).with_args(
