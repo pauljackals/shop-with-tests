@@ -21,4 +21,6 @@ class Rental:
         return True
 
     def get_user_reservations(self, id_user):
+        if type(id_user) != str:
+            raise TypeError('User ID must be a string')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
