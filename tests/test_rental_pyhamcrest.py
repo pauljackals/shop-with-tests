@@ -181,7 +181,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(TypeError)
+            raises(LookupError)
         )
 
     def test_create_reservation_minute_error_date_from(self):
