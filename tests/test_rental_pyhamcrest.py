@@ -107,6 +107,17 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(ValueError)
         )
 
+    def test_create_reservation_wrong_date_to_wrong_day_in_month_february_non_leap(self):
+        assert_that(
+            calling(self.rental.create_reservation).with_args(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2021-12-21 14:30',
+                '2021-02-29 13:00'
+            ),
+            raises(ValueError)
+        )
+
     def test_create_reservation_from_day_in_month_february_leap(self):
         self.rental.load_database()
         assert_that(
