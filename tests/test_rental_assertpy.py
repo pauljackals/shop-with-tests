@@ -75,6 +75,17 @@ class TestRentalAssertPy(unittest.TestCase):
             '2020-12-21 13:00'
         )
 
+    def test_create_reservation_from_day_in_month_february_leap(self):
+        self.rental.load_database()
+        assert_that(
+            uuid.UUID(self.rental.create_reservation(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2024-02-29 14:30',
+                '2024-12-21 13:00'
+            ), version=4)
+        ).is_instance_of(uuid.UUID)
+
     def tearDown(self):
         self.rental = None
 
