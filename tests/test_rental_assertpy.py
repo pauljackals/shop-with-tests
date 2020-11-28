@@ -2,11 +2,14 @@ import unittest
 from assertpy import assert_that
 from rental.rental import Rental
 import uuid
+import json
 
 
 class TestRentalAssertPy(unittest.TestCase):
     def setUp(self):
-        self.rental = Rental()
+        with open('../tests/database_for_testing.json') as file:
+            database = json.loads(file.read())
+        self.rental = Rental(database)
 
     def test_load_database(self):
         assert_that(self.rental.load_database()).is_true()
@@ -30,18 +33,15 @@ class TestRentalAssertPy(unittest.TestCase):
                 "to": "2020-12-19 14:30"
             }
         ]
-        self.rental.load_database()
         assert_that(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf')).contains_only(*reservations)
 
     def test_get_user_reservations_wrong_type(self):
         assert_that(self.rental.get_user_reservations).raises(TypeError).when_called_with(123)
 
     def test_get_user_reservations_no_user(self):
-        self.rental.load_database()
         assert_that(self.rental.get_user_reservations).raises(LookupError).when_called_with('test')
 
     def test_create_reservation(self):
-        self.rental.load_database()
         assert_that(
             uuid.UUID(self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
@@ -100,7 +100,6 @@ class TestRentalAssertPy(unittest.TestCase):
         )
 
     def test_create_reservation_from_day_in_month_february_leap(self):
-        self.rental.load_database()
         assert_that(
             uuid.UUID(self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
@@ -111,7 +110,6 @@ class TestRentalAssertPy(unittest.TestCase):
         ).is_instance_of(uuid.UUID)
 
     def test_create_reservation_to_day_in_month_february_leap(self):
-        self.rental.load_database()
         assert_that(
             uuid.UUID(self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',

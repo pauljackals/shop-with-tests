@@ -5,8 +5,11 @@ import re
 
 
 class Rental:
-    def __init__(self):
-        self._database = {}
+    def __init__(self, database=None):
+        if database:
+            self._database = database
+        else:
+            self._database = {}
 
     def load_database(self, database_file='database.json'):
         if type(database_file) != str:

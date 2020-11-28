@@ -1,0 +1,79 @@
+{
+  "name": "Game Rental Shop",
+  "description": "Rental shop with older games for older systems.",
+  "games": [
+    {
+      "id": 0,
+      "name": "Call of Duty: Finest Hour"
+    },
+    {
+      "id": 1,
+      "name": "Warriors of Might and Magic"
+    },
+    {
+      "id": 2,
+      "name": "Battlefield 2: Modern Combat"
+    }
+  ],
+  "users": [
+    {
+      "id": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "email": "test@example.com"
+    },
+    {
+      "id": "2fe45694-eb13-4283-824e-cd6fb179bfcf",
+      "email": "pong@example.com"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "4248797f-9a3e-4a52-b3f7-bb72eef51755",
+      "user": "2fe45694-eb13-4283-824e-cd6fb179bfcf",
+      "game": 1,
+      "from": "2020-12-15 13:00",
+      "to": "2020-12-19 14:30"
+    }
+  ],
+  "open_hours": [
+    {
+      "id": 0,
+      "is_open": true,
+      "open": 12,
+      "close": 18
+    },
+    {
+      "id": 1,
+      "is_open": true,
+      "open": 12,
+      "close": 18
+    },
+    {
+      "id": 2,
+      "is_open": true,
+      "open": 12,
+      "close": 18
+    },
+    {
+      "id": 3,
+      "is_open": true,
+      "open": 12,
+      "close": 18
+    },
+    {
+      "id": 4,
+      "is_open": true,
+      "open": 12,
+      "close": 18
+    },
+    {
+      "id": 5,
+      "is_open": true,
+      "open": 10,
+      "close": 15
+    },
+    {
+      "id": 6,
+      "is_open": false
+    }
+  ]
+}
