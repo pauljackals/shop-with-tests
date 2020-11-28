@@ -56,6 +56,9 @@ class Rental:
         if (date_time_to - date_time_from).total_seconds() <= 0:
             raise ValueError('End date must be later than start date')
 
+        if not self._database['open_hours'][date_time_from.weekday()]['is_open']:
+            raise ValueError('Rental shop is closed during this time')
+
         new_reservation_id = str(uuid.uuid4())
         self._database['reservations'].append(
             {
