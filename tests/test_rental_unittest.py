@@ -16,6 +16,10 @@ class TestRentalUnittest(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             self.rental.load_database('test')
 
+    def test_load_database_wrong_type(self):
+        with self.assertRaises(TypeError):
+            self.rental.load_database(23)
+
     def tearDown(self):
         self.rental = None
 
