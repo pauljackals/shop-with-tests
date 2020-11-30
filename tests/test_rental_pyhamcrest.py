@@ -315,6 +315,16 @@ class TestRentalPyHamcrest(unittest.TestCase):
             instance_of(uuid.UUID)
         )
 
+    def test_add_user_error_empty_name(self):
+        assert_that(
+            calling(self.rental.add_user).with_args(
+                'Test',
+                '',
+                'something@example.com'
+            ),
+            raises(ValueError)
+        )
+
     def tearDown(self):
         self.rental = None
 

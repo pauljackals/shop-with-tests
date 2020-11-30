@@ -248,6 +248,13 @@ class TestRentalAssertPy(unittest.TestCase):
             ), version=4)
         ).is_instance_of(uuid.UUID)
 
+    def test_add_user_error_empty_name(self):
+        assert_that(self.rental.add_user).raises(ValueError).when_called_with(
+            'Test',
+            '',
+            'something@example.com'
+        )
+
     def tearDown(self):
         self.rental = None
 
