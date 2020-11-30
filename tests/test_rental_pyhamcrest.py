@@ -305,6 +305,16 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(ValueError)
         )
 
+    def test_add_user(self):
+        assert_that(
+            uuid.UUID(self.rental.create_reservation(
+                'Test',
+                'Testington',
+                'something@example.com'
+            ), version=4),
+            instance_of(uuid.UUID)
+        )
+
     def tearDown(self):
         self.rental = None
 

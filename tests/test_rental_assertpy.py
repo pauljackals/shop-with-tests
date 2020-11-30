@@ -239,6 +239,15 @@ class TestRentalAssertPy(unittest.TestCase):
             '2020-12-16 15:00'
         )
 
+    def test_add_user(self):
+        assert_that(
+            uuid.UUID(self.rental.create_reservation(
+                'Test',
+                'Testington',
+                'something@example.com'
+            ), version=4)
+        ).is_instance_of(uuid.UUID)
+
     def tearDown(self):
         self.rental = None
 

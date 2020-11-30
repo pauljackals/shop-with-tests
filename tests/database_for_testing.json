@@ -26,11 +26,19 @@
   "users": [
     {
       "id": "8a85f066-bd8d-43df-b471-a6e708471c4c",
-      "email": "test@example.com"
+      "email": "test@example.com",
+      "name": {
+        "first": "John",
+        "last": "Doe"
+      }
     },
     {
       "id": "2fe45694-eb13-4283-824e-cd6fb179bfcf",
-      "email": "pong@example.com"
+      "email": "pong@example.com",
+      "name": {
+        "first": "Carl",
+        "last": "Smith"
+      }
     }
   ],
   "reservations": [
