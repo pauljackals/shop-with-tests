@@ -277,6 +277,14 @@ class TestRentalUnittest(unittest.TestCase):
                 'something@example.com'
             ), version=4), uuid.UUID)
 
+    def test_add_user_error_empty_name(self):
+        with self.assertRaises(ValueError):
+            self.rental.add_user(
+                'Test',
+                '',
+                'something@example.com'
+            )
+
     def tearDown(self):
         self.rental = None
 
