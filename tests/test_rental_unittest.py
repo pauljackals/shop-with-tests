@@ -301,6 +301,14 @@ class TestRentalUnittest(unittest.TestCase):
                 None
             )
 
+    def test_add_user_error_email_invalid(self):
+        with self.assertRaises(ValueError):
+            self.rental.add_user(
+                'Test',
+                'Testington',
+                'somethingexample.com'
+            )
+
     def tearDown(self):
         self.rental = None
 
