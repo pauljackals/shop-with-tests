@@ -20,6 +20,9 @@ class TestRentalUnittest(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.rental.load_database(23)
 
+    def test_save_database(self):
+        self.assertTrue(self.rental.save_database())
+
     def tearDown(self):
         self.rental = None
 
