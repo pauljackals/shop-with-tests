@@ -15,6 +15,8 @@ class Rental:
     def load_database(self, database_file='database.json'):
         if type(database_file) != str:
             raise TypeError('Database file name must be a string')
+        if database_file == '':
+            raise ValueError('Database file name must not be empty')
         if not os.path.exists('rental/'+database_file):
             raise FileNotFoundError("Database doesn't exist")
         with open('rental/' + database_file) as file:
