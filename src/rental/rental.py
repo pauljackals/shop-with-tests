@@ -51,6 +51,8 @@ class Rental:
 
         if type(user_id) != str:
             raise TypeError('User ID must be a string')
+        if user_id == '':
+            raise ValueError('User ID must not be empty')
         if user_id not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
         if type(game_id) != int:
