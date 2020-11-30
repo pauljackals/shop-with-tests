@@ -151,6 +151,15 @@ class TestRentalUnittest(unittest.TestCase):
                 '2020-12-21 13:00'
             )
 
+    def test_create_reservation_error_date_to_empty(self):
+        with self.assertRaises(ValueError):
+            self.rental.create_reservation(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2020-12-19 14:30',
+                ''
+            )
+
     def test_create_reservation_wrong_user_type(self):
         with self.assertRaises(TypeError):
             self.rental.create_reservation(
