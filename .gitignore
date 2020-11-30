@@ -12,4 +12,4 @@ __pycache__/
 .tox
 .cache
 /.idea/
-/data/database_copy.json
+/src/rental/database_copy.json

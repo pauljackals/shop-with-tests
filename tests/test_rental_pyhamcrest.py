@@ -7,7 +7,7 @@ import json
 
 class TestRentalPyHamcrest(unittest.TestCase):
     def setUp(self):
-        with open('../tests/database_for_testing.json') as file:
+        with open('../data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.rental = Rental(database)
 
