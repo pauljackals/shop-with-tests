@@ -52,6 +52,10 @@ class TestRentalUnittest(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.rental.get_user_reservations(123)
 
+    def test_get_user_reservations_empty(self):
+        with self.assertRaises(ValueError):
+            self.rental.get_user_reservations('')
+
     def test_get_user_reservations_no_user(self):
         with self.assertRaises(LookupError):
             self.rental.get_user_reservations('test')

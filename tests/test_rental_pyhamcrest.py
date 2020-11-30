@@ -49,6 +49,9 @@ class TestRentalPyHamcrest(unittest.TestCase):
     def test_get_user_reservations_wrong_type(self):
         assert_that(calling(self.rental.get_user_reservations).with_args(123), raises(TypeError))
 
+    def test_get_user_reservations_empty(self):
+        assert_that(calling(self.rental.get_user_reservations).with_args(''), raises(ValueError))
+
     def test_get_user_reservations_no_user(self):
         assert_that(calling(self.rental.get_user_reservations).with_args('test'), raises(LookupError))
 

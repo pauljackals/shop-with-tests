@@ -49,6 +49,9 @@ class TestRentalAssertPy(unittest.TestCase):
     def test_get_user_reservations_wrong_type(self):
         assert_that(self.rental.get_user_reservations).raises(TypeError).when_called_with(123)
 
+    def test_get_user_reservations_empty(self):
+        assert_that(self.rental.get_user_reservations).raises(ValueError).when_called_with('')
+
     def test_get_user_reservations_no_user(self):
         assert_that(self.rental.get_user_reservations).raises(LookupError).when_called_with('test')
 
