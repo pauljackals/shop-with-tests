@@ -91,6 +91,8 @@ class Rental:
         return new_reservation_id
 
     def add_user(self, name, lastname, email):
+        if type(name) != str or type(lastname) != str:
+            raise TypeError('Names must be strings')
         if name == '' or lastname == '':
             raise ValueError('Names must not be empty')
         new_user_id = str(uuid.uuid4())
