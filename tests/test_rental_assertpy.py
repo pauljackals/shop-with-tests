@@ -262,6 +262,13 @@ class TestRentalAssertPy(unittest.TestCase):
             'something@example.com'
         )
 
+    def test_add_user_error_wrong_email_type(self):
+        assert_that(self.rental.add_user).raises(TypeError).when_called_with(
+            'Test',
+            'Testington',
+            None
+        )
+
     def tearDown(self):
         self.rental = None
 

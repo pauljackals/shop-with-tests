@@ -335,6 +335,16 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(TypeError)
         )
 
+    def test_add_user_error_wrong_email_type(self):
+        assert_that(
+            calling(self.rental.add_user).with_args(
+                'Test',
+                'Testington',
+                None
+            ),
+            raises(TypeError)
+        )
+
     def tearDown(self):
         self.rental = None
 
