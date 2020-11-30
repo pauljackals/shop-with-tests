@@ -43,6 +43,10 @@ class TestRentalUnittest(unittest.TestCase):
         ]
         self.assertListEqual(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf'), reservations)
 
+    def test_get_user_reservations_wrong_type(self):
+        with self.assertRaises(TypeError):
+            self.rental.get_user_reservations(123)
+
     def tearDown(self):
         self.rental = None
 
