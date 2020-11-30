@@ -269,6 +269,14 @@ class TestRentalUnittest(unittest.TestCase):
                 '2020-12-16 15:00'
             )
 
+    def test_add_user(self):
+        self.assertIsInstance(
+            uuid.UUID(self.rental.add_user(
+                'Test',
+                'Testington',
+                'something@example.com'
+            ), version=4), uuid.UUID)
+
     def tearDown(self):
         self.rental = None
 
