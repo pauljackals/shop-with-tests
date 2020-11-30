@@ -23,6 +23,14 @@ class TestRentalUnittest(unittest.TestCase):
     def test_save_database(self):
         self.assertTrue(self.rental.save_database())
 
+    def test_save_database_file(self):
+        self.rental.save_database()
+        with open('../data/database_for_testing.json') as file:
+            database = json.loads(file.read())
+        with open('rental/database_copy.json') as file:
+            database_copy = json.loads(file.read())
+        self.assertDictEqual(database, database_copy)
+
     def tearDown(self):
         self.rental = None
 
