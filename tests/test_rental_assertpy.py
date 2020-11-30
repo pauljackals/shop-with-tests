@@ -241,7 +241,7 @@ class TestRentalAssertPy(unittest.TestCase):
 
     def test_add_user(self):
         assert_that(
-            uuid.UUID(self.rental.create_reservation(
+            uuid.UUID(self.rental.add_user(
                 'Test',
                 'Testington',
                 'something@example.com'
