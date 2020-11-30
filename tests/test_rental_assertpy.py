@@ -23,6 +23,14 @@ class TestRentalAssertPy(unittest.TestCase):
     def test_save_database(self):
         assert_that(self.rental.save_database()).is_true()
 
+    def test_save_database_file(self):
+        self.rental.save_database()
+        with open('../data/database_for_testing.json') as file:
+            database = json.loads(file.read())
+        with open('rental/database_copy.json') as file:
+            database_copy = json.loads(file.read())
+        assert_that(database).is_equal_to(database_copy)
+
     def test_get_user_reservations(self):
         reservations = [
             {
