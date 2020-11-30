@@ -89,3 +89,17 @@ class Rental:
             }
         )
         return new_reservation_id
+
+    def add_user(self, name, lastname, email):
+        new_user_id = str(uuid.uuid4())
+        self._database['users'].append(
+            {
+                'id': new_user_id,
+                'email': email,
+                'name': {
+                    'first': name,
+                    'last': lastname
+                }
+            }
+        )
+        return new_user_id
