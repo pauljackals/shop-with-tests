@@ -20,6 +20,9 @@ class TestRentalPyHamcrest(unittest.TestCase):
     def test_load_database_wrong_type(self):
         assert_that(calling(self.rental.load_database).with_args(23), raises(TypeError))
 
+    def test_load_database_empty_name(self):
+        assert_that(calling(self.rental.load_database).with_args(''), raises(ValueError))
+
     def test_save_database(self):
         assert_that(self.rental.save_database(), equal_to(True))
 

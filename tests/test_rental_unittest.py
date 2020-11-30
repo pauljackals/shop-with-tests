@@ -21,6 +21,10 @@ class TestRentalUnittest(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.rental.load_database(23)
 
+    def test_load_database_empty_name(self):
+        with self.assertRaises(ValueError):
+            self.rental.load_database('')
+
     def test_save_database(self):
         self.assertTrue(self.rental.save_database())
 
