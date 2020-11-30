@@ -143,6 +143,15 @@ class TestRentalUnittest(unittest.TestCase):
                 '2020-12-21 13:00'
             )
 
+    def test_create_reservation_no_user(self):
+        with self.assertRaises(LookupError):
+            self.rental.create_reservation(
+                'test',
+                1,
+                '2020-12-19 14:30',
+                '2020-12-21 13:00'
+            )
+
     def tearDown(self):
         self.rental = None
 
