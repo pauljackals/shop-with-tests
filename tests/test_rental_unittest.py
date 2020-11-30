@@ -62,6 +62,15 @@ class TestRentalUnittest(unittest.TestCase):
             ), version=4), uuid.UUID
         )
 
+    def test_create_reservation_wrong_date_from_non_digit(self):
+        with self.assertRaises(ValueError):
+            self.rental.create_reservation(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '20d0-12-19 14:30',
+                '2020-12-21 13:00'
+            )
+
     def tearDown(self):
         self.rental = None
 
