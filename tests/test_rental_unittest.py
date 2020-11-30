@@ -134,6 +134,15 @@ class TestRentalUnittest(unittest.TestCase):
                 '2024-02-29 13:00'
             ), version=4), uuid.UUID)
 
+    def test_create_reservation_wrong_user_type(self):
+        with self.assertRaises(TypeError):
+            self.rental.create_reservation(
+                34,
+                1,
+                '2020-12-19 14:30',
+                '2020-12-21 13:00'
+            )
+
     def tearDown(self):
         self.rental = None
 
