@@ -269,6 +269,13 @@ class TestRentalAssertPy(unittest.TestCase):
             None
         )
 
+    def test_add_user_error_email_invalid(self):
+        assert_that(self.rental.add_user).raises(ValueError).when_called_with(
+            'Test',
+            'Testington',
+            'somethingexample.com'
+        )
+
     def tearDown(self):
         self.rental = None
 

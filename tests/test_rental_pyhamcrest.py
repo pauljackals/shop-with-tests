@@ -345,6 +345,16 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(TypeError)
         )
 
+    def test_add_user_error_email_invalid(self):
+        assert_that(
+            calling(self.rental.add_user).with_args(
+                'Test',
+                'Testington',
+                'somethingexample.com'
+            ),
+            raises(ValueError)
+        )
+
     def tearDown(self):
         self.rental = None
 
