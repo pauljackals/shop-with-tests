@@ -325,6 +325,16 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(ValueError)
         )
 
+    def test_add_user_error_wrong_name_type(self):
+        assert_that(
+            calling(self.rental.add_user).with_args(
+                1,
+                'Testington',
+                'something@example.com'
+            ),
+            raises(TypeError)
+        )
+
     def tearDown(self):
         self.rental = None
 
