@@ -97,6 +97,8 @@ class Rental:
             raise TypeError('Email must be a string')
         if name == '' or lastname == '':
             raise ValueError('Names must not be empty')
+        if not re.search(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
+            raise ValueError('Email is not valid')
         new_user_id = str(uuid.uuid4())
         self._database['users'].append(
             {
