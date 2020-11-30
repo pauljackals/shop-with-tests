@@ -285,6 +285,14 @@ class TestRentalUnittest(unittest.TestCase):
                 'something@example.com'
             )
 
+    def test_add_user_error_wrong_name_type(self):
+        with self.assertRaises(TypeError):
+            self.rental.add_user(
+                1,
+                'Testington',
+                'something@example.com'
+            )
+
     def tearDown(self):
         self.rental = None
 
