@@ -12,6 +12,10 @@ class TestRentalUnittest(unittest.TestCase):
     def test_load_database(self):
         self.assertTrue(self.rental.load_database())
 
+    def test_load_database_no_file(self):
+        with self.assertRaises(FileNotFoundError):
+            self.rental.load_database('test')
+
     def tearDown(self):
         self.rental = None
 
