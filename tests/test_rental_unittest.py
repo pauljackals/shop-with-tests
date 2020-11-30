@@ -31,6 +31,18 @@ class TestRentalUnittest(unittest.TestCase):
             database_copy = json.loads(file.read())
         self.assertDictEqual(database, database_copy)
 
+    def test_get_user_reservations(self):
+        reservations = [
+            {
+                "id": "4248797f-9a3e-4a52-b3f7-bb72eef51755",
+                "user": "2fe45694-eb13-4283-824e-cd6fb179bfcf",
+                "game": 1,
+                "from": "2020-12-15 13:00",
+                "to": "2020-12-19 14:30"
+            }
+        ]
+        self.assertListEqual(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf'), reservations)
+
     def tearDown(self):
         self.rental = None
 
