@@ -31,6 +31,8 @@ class Rental:
     def get_user_reservations(self, id_user):
         if type(id_user) != str:
             raise TypeError('User ID must be a string')
+        if id_user == '':
+            raise ValueError('User ID must not be empty')
         if id_user not in map(lambda user: user['id'], self._database['users']):
             raise LookupError('No such user')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
