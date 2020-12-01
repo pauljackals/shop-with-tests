@@ -12,7 +12,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
         self.rental = Rental(database)
 
     def test_load_database(self):
-        assert_that(self.rental.load_database(), equal_to(True))
+        assert_that(self.rental.load_database('../data/database_for_testing.json'), equal_to(True))
 
     def test_load_database_no_file(self):
         assert_that(calling(self.rental.load_database).with_args('test'), raises(FileNotFoundError))

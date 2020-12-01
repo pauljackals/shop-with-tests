@@ -12,7 +12,7 @@ class TestRentalAssertPy(unittest.TestCase):
         self.rental = Rental(database)
 
     def test_load_database(self):
-        assert_that(self.rental.load_database()).is_true()
+        assert_that(self.rental.load_database('../data/database_for_testing.json')).is_true()
 
     def test_load_database_no_file(self):
         assert_that(self.rental.load_database).raises(FileNotFoundError).when_called_with('test')

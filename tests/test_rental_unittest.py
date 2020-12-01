@@ -11,7 +11,7 @@ class TestRentalUnittest(unittest.TestCase):
         self.rental = Rental(database)
 
     def test_load_database(self):
-        self.assertTrue(self.rental.load_database())
+        self.assertTrue(self.rental.load_database('../data/database_for_testing.json'))
 
     def test_load_database_no_file(self):
         with self.assertRaises(FileNotFoundError):
