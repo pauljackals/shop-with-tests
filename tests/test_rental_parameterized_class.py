@@ -35,6 +35,12 @@ from rental.rental import Rental
             1,
             '2020-12-18 21:00',
             '2020-12-19 13:00'
+        ), ValueError),
+        ('error_date_to_open_hours_before', (
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-12-18 14:30',
+            '2020-12-19 09:00'
         ), ValueError)
     ]
 )
