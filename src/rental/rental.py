@@ -24,7 +24,7 @@ class Rental:
         return True
 
     def save_database(self):
-        with open('rental/database_copy.json', 'w') as file:
+        with open('src/rental/database_copy.json', 'w') as file:
             file.write(json.dumps(self._database))
         return True
 
