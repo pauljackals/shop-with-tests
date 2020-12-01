@@ -28,7 +28,8 @@ class TestRentalParameterizedMethod(unittest.TestCase):
 
     @parameterized.expand([
         ('error_empty_name', 'Test', '', 'something@example.com', ValueError),
-        ('error_wrong_name_type', 1, 'Testington', 'something@example.com', TypeError)
+        ('error_wrong_name_type', 1, 'Testington', 'something@example.com', TypeError),
+        ('error_wrong_email_type', 'Test', 'Testington', None, TypeError)
     ])
     def test_load_user(self, name, firstname, lastname, email, error):
         with self.assertRaises(error):
