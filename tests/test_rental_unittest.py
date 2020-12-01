@@ -6,12 +6,12 @@ import uuid
 
 class TestRentalUnittest(unittest.TestCase):
     def setUp(self):
-        with open('../data/database_for_testing.json') as file:
+        with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.rental = Rental(database)
 
     def test_load_database(self):
-        self.assertTrue(self.rental.load_database('../data/database_for_testing.json'))
+        self.assertTrue(self.rental.load_database('data/database_for_testing.json'))
 
     def test_load_database_no_file(self):
         with self.assertRaises(FileNotFoundError):
@@ -30,9 +30,9 @@ class TestRentalUnittest(unittest.TestCase):
 
     def test_save_database_file(self):
         self.rental.save_database()
-        with open('../data/database_for_testing.json') as file:
+        with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
-        with open('rental/database_copy.json') as file:
+        with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
         self.assertDictEqual(database, database_copy)
 

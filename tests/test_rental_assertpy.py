@@ -7,12 +7,12 @@ import json
 
 class TestRentalAssertPy(unittest.TestCase):
     def setUp(self):
-        with open('../data/database_for_testing.json') as file:
+        with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.rental = Rental(database)
 
     def test_load_database(self):
-        assert_that(self.rental.load_database('../data/database_for_testing.json')).is_true()
+        assert_that(self.rental.load_database('data/database_for_testing.json')).is_true()
 
     def test_load_database_no_file(self):
         assert_that(self.rental.load_database).raises(FileNotFoundError).when_called_with('test')
@@ -28,9 +28,9 @@ class TestRentalAssertPy(unittest.TestCase):
 
     def test_save_database_file(self):
         self.rental.save_database()
-        with open('../data/database_for_testing.json') as file:
+        with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
-        with open('rental/database_copy.json') as file:
+        with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
         assert_that(database).is_equal_to(database_copy)
 
