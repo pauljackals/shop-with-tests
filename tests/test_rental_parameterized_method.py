@@ -26,6 +26,13 @@ class TestRentalParameterizedMethod(unittest.TestCase):
         with self.assertRaises(expected):
             self.rental.load_database(path)
 
+    @parameterized.expand([
+        ('error_empty_name', 'Test', '', 'something@example.com', ValueError)
+    ])
+    def test_load_user(self, name, firstname, lastname, email, error):
+        with self.assertRaises(error):
+            self.rental.add_user(firstname, lastname, email)
+
     def tearDown(self):
         self.rental = None
 
