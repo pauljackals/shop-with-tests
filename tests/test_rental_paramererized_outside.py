@@ -70,7 +70,13 @@ from rental.rental import Rental
             '1',
             '2020-12-19 14:30',
             '2020-12-21 13:00'
-    ), TypeError)
+    ), TypeError),
+    ('error_empty_user', (
+            '',
+            1,
+            '2020-12-19 14:30',
+            '2020-12-21 13:00'
+    ), ValueError)
 ])
 def test_create_reservation(name, data, error):
     with open('data/database_for_testing.json') as file:
