@@ -16,6 +16,12 @@ from rental.rental import Rental
             1,
             '2020-12-19 14:30',
             '20d0-12-21 13:00'
+    ), ValueError),
+    ('wrong_date_from_wrong_day_in_month', (
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-11-31 14:30',
+            '2020-12-21 13:00'
     ), ValueError)
 ])
 def test_create_reservation(name, data, error):
