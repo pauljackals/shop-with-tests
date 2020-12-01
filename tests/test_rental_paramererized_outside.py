@@ -82,7 +82,13 @@ from rental.rental import Rental
             999,
             '2020-12-19 14:30',
             '2020-12-21 13:00'
-    ), LookupError)
+    ), LookupError),
+    ('minute_error_date_from', (
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-12-19 14:29',
+            '2020-12-21 13:00'
+    ), ValueError)
 ])
 def test_create_reservation(name, data, error):
     with open('data/database_for_testing.json') as file:
