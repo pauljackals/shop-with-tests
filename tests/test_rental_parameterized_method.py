@@ -19,7 +19,8 @@ class TestRentalParameterizedMethod(unittest.TestCase):
 
     @parameterized.expand([
         ('no_file', 'test', FileNotFoundError),
-        ('wrong_type', 23, TypeError)
+        ('wrong_type', 23, TypeError),
+        ('empty_name', '', ValueError)
     ])
     def test_load_database_error(self, name, path, expected):
         with self.assertRaises(expected):
