@@ -36,6 +36,12 @@ class TestRentalParameterizedMethod(unittest.TestCase):
         with self.assertRaises(error):
             self.rental.add_user(firstname, lastname, email)
 
+    @parameterized.expand([
+        ('correct', ('8a85f066-bd8d-43df-b471-a6e708471c4c', 1, '2020-12-19 14:30', '2020-12-21 13:00'), uuid.UUID)
+    ])
+    def test_create_reservation(self, name, data, instance):
+        self.assertIsInstance(uuid.UUID(self.rental.create_reservation(*data), version=4), instance)
+
     def tearDown(self):
         self.rental = None
 
