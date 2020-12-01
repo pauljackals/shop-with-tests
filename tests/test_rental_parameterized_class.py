@@ -53,6 +53,12 @@ from rental.rental import Rental
             1,
             '2020-12-15 13:30',
             '2020-12-21 15:00'
+        ), ValueError),
+        ('error_date_to_already_taken', (
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-12-14 13:30',
+            '2020-12-16 15:00'
         ), ValueError)
     ]
 )
