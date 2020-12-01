@@ -38,7 +38,8 @@ class TestRentalParameterizedMethod(unittest.TestCase):
 
     @parameterized.expand([
         ('correct', ('8a85f066-bd8d-43df-b471-a6e708471c4c', 1, '2020-12-19 14:30', '2020-12-21 13:00'), uuid.UUID),
-        ('from_day_in_month_february_leap', ('8a85f066-bd8d-43df-b471-a6e708471c4c', 1, '2024-02-29 14:30', '2024-12-21 13:00'), uuid.UUID)
+        ('from_day_in_month_february_leap', ('8a85f066-bd8d-43df-b471-a6e708471c4c', 1, '2024-02-29 14:30', '2024-12-21 13:00'), uuid.UUID),
+        ('to_day_in_month_february_leap', ('8a85f066-bd8d-43df-b471-a6e708471c4c', 1, '2024-02-21 14:30', '2024-02-29 13:00'), uuid.UUID)
     ])
     def test_create_reservation(self, name, data, instance):
         self.assertIsInstance(uuid.UUID(self.rental.create_reservation(*data), version=4), instance)
