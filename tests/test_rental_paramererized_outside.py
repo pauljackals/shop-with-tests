@@ -96,7 +96,7 @@ from rental.rental import Rental
             '2020-12-21 13:01'
     ), ValueError)
 ])
-def test_create_reservation(name, data, error):
+def test_parameterized_create_reservation(name, data, error):
     with open('data/database_for_testing.json') as file:
         database = json.loads(file.read())
     rental = Rental(database)
