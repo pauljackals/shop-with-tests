@@ -43,6 +43,10 @@ class TestStatsUnittest(unittest.TestCase):
         stats = Stats(self.database_original)
         self.assertEqual(stats.get_games_total(), 4)
 
+    def test_get_systems_total(self):
+        stats = Stats(self.database_original)
+        self.assertEqual(stats.get_systems_total(), 3)
+
     def tearDown(self):
         self.database_original = None
 
