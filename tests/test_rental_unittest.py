@@ -9,6 +9,7 @@ class TestRentalUnittest(unittest.TestCase):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.rental = Rental(database)
+        self.database_original = database
 
     def test_load_database(self):
         self.assertTrue(self.rental.load_database('data/database_for_testing.json'))
@@ -30,11 +31,9 @@ class TestRentalUnittest(unittest.TestCase):
 
     def test_save_database_file(self):
         self.rental.save_database()
-        with open('data/database_for_testing.json') as file:
-            database = json.loads(file.read())
         with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
-        self.assertDictEqual(database, database_copy)
+        self.assertDictEqual(self.database_original, database_copy)
 
     def test_get_user_reservations(self):
         reservations = [

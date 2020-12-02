@@ -10,6 +10,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.rental = Rental(database)
+        self.database_original = database
 
     def test_load_database(self):
         assert_that(self.rental.load_database('data/database_for_testing.json'), equal_to(True))
@@ -28,11 +29,9 @@ class TestRentalPyHamcrest(unittest.TestCase):
 
     def test_save_database_file(self):
         self.rental.save_database()
-        with open('data/database_for_testing.json') as file:
-            database = json.loads(file.read())
         with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
-        assert_that(database, equal_to(database_copy))
+        assert_that(self.database_original, equal_to(database_copy))
 
     def test_get_user_reservations(self):
         reservations = [
