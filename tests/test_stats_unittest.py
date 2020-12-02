@@ -59,6 +59,20 @@ class TestStatsUnittest(unittest.TestCase):
         stats = Stats(self.database_original)
         self.assertEqual(stats.get_total_hours_week(), 35)
 
+    def test_get_games_dates_reserved(self):
+        stats = Stats(self.database_original)
+        self.assertListEqual(stats.get_games_dates_reserved(), [
+                {
+                    'id': 1,
+                    'dates': [
+                        {
+                            "from": "2020-12-15 13:00",
+                            "to": "2020-12-19 14:30"
+                        }
+                    ]
+                }
+            ])
+
     def tearDown(self):
         self.database_original = None
 
