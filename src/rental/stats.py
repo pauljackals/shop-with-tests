@@ -44,6 +44,9 @@ class Stats:
     def get_games_total_in_system(self):
         return self._games_total_in_system
 
+    def get_total_hours_week(self):
+        return self._total_hours_week
+
     def get_all_stats(self):
         return {
             'users_total': self._users_total,
