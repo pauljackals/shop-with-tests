@@ -35,6 +35,9 @@ class Stats:
     def get_users_total(self):
         return self._users_total
 
+    def get_games_total(self):
+        return self._games_total
+
     def get_all_stats(self):
         return {
             'users_total': self._users_total,
