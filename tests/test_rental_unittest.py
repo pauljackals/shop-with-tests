@@ -1,6 +1,7 @@
 import unittest
 import json
 from rental.rental import Rental
+from rental.stats import Stats
 import uuid
 
 
@@ -342,6 +343,9 @@ class TestRentalUnittest(unittest.TestCase):
                 'Testington',
                 'somethingexample.com'
             )
+
+    def test_get_stats(self):
+        self.assertIsInstance(self.rental.get_stats(), Stats)
 
     def tearDown(self):
         self.rental = None
