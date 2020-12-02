@@ -35,6 +35,10 @@ class TestStatsUnittest(unittest.TestCase):
         stats = Stats(self.database_original)
         self.assertDictEqual(stats.get_all_stats(), stats_manual)
 
+    def test_get_users_total(self):
+        stats = Stats(self.database_original)
+        self.assertEqual(stats.get_users_total(), 2)
+
     def tearDown(self):
         self.database_original = None
 
