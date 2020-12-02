@@ -3,6 +3,7 @@ import os
 import uuid
 import re
 import datetime
+from rental.stats import Stats
 
 
 class Rental:
@@ -119,34 +120,4 @@ class Rental:
         return new_user_id
 
     def get_stats(self):
-        games = self._database['games']
-        systems = self._database['systems']
-        games_dates_reserved = []
-        for reservation in self._database['reservations']:
-            game_index = -1
-            game_reserved = list(filter(lambda game: game['id'] == reservation['game'], games_dates_reserved))
-            if len(game_reserved):
-                game_index = games_dates_reserved.index(game_reserved[0])
-            if game_index == -1:
-                games_dates_reserved.append({
-                    'id': reservation['game'],
-                    'dates': []
-                })
-            games_dates_reserved[game_index]['dates'].append(
-                {
-                    'from': reservation['from'],
-                    'to': reservation['to']
-                }
-            )
-
-        return {
-            'users_total': len(self._database['users']),
-            'games_total': len(games),
-            'systems_total': len(systems),
-            'games_total_in_system': list(map(lambda system: {
-                'id': system['id'],
-                'value': len(list(filter(lambda game: game['system'] == system['id'], games)))
-            }, systems)),
-            'total_hours_week': sum(map(lambda day: day['close'] - day['open'], filter(lambda day_filter: day_filter['is_open'], self._database['open_hours']))),
-            'games_dates_reserved': games_dates_reserved
-        }
+        return Stats(self._database)
