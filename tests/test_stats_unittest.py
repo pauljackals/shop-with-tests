@@ -55,6 +55,10 @@ class TestStatsUnittest(unittest.TestCase):
                 {'id': 2, 'value': 1}
         ])
 
+    def test_get_total_hours_week(self):
+        stats = Stats(self.database_original)
+        self.assertEqual(stats.get_total_hours_week(), 35)
+
     def tearDown(self):
         self.database_original = None
 
