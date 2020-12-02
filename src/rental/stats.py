@@ -38,6 +38,9 @@ class Stats:
     def get_games_total(self):
         return self._games_total
 
+    def get_systems_total(self):
+        return self._systems_total
+
     def get_all_stats(self):
         return {
             'users_total': self._users_total,
