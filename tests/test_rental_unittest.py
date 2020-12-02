@@ -15,15 +15,15 @@ class TestRentalUnittest(unittest.TestCase):
         self.assertTrue(self.rental.load_database('data/database_for_testing.json'))
 
     def test_load_database_no_file(self):
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaisesRegex(FileNotFoundError, "^Database doesn't exist$"):
             self.rental.load_database('test')
 
     def test_load_database_wrong_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, "^Database file name must be a string$"):
             self.rental.load_database(23)
 
     def test_load_database_empty_name(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "^Database file name must not be empty$"):
             self.rental.load_database('')
 
     def test_save_database(self):
@@ -48,15 +48,15 @@ class TestRentalUnittest(unittest.TestCase):
         self.assertListEqual(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf'), reservations)
 
     def test_get_user_reservations_wrong_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, '^User ID must be a string$'):
             self.rental.get_user_reservations(123)
 
     def test_get_user_reservations_empty(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^User ID must not be empty$'):
             self.rental.get_user_reservations('')
 
     def test_get_user_reservations_no_user(self):
-        with self.assertRaises(LookupError):
+        with self.assertRaisesRegex(LookupError, '^No such user$'):
             self.rental.get_user_reservations('test')
 
     def test_create_reservation(self):
@@ -70,7 +70,7 @@ class TestRentalUnittest(unittest.TestCase):
         )
 
     def test_create_reservation_wrong_date_from_non_digit(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Wrong date syntax$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -79,7 +79,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_date_to_non_digit(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Wrong date syntax$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -88,7 +88,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_date_from_wrong_day_in_month(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^No such day in provided month$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -97,7 +97,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_date_to_wrong_day_in_month(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^No such day in provided month$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -106,7 +106,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_date_from_wrong_day_in_month_february_non_leap(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^No such day in provided month$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -115,7 +115,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_date_to_wrong_day_in_month_february_non_leap(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^No such day in provided month$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -142,7 +142,7 @@ class TestRentalUnittest(unittest.TestCase):
             ), version=4), uuid.UUID)
 
     def test_create_reservation_error_date_from_empty(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Wrong date syntax$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -151,7 +151,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_to_empty(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Wrong date syntax$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -160,7 +160,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_wrong_user_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, '^User ID must be a string$'):
             self.rental.create_reservation(
                 34,
                 1,
@@ -169,7 +169,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_no_user(self):
-        with self.assertRaises(LookupError):
+        with self.assertRaisesRegex(LookupError, '^No such user$'):
             self.rental.create_reservation(
                 'test',
                 1,
@@ -178,7 +178,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_wrong_game_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, '^Game ID must be an integer$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 '1',
@@ -187,7 +187,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_empty_user(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^User ID must not be empty$'):
             self.rental.create_reservation(
                 '',
                 1,
@@ -196,7 +196,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_no_game(self):
-        with self.assertRaises(LookupError):
+        with self.assertRaisesRegex(LookupError, '^No such game$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 999,
@@ -205,7 +205,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_minute_error_date_from(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -214,7 +214,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_minute_error_date_to(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -223,7 +223,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_dates_switched(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^End date must be later than start date$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -232,7 +232,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_from_closed_day(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -241,7 +241,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_to_closed_day(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -250,7 +250,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_from_open_hours_before(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -259,7 +259,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_from_open_hours_after(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -268,7 +268,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_to_open_hours_before(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -277,7 +277,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_to_open_hours_after(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Rental shop is closed during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -286,7 +286,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_from_already_taken(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Game is already reserved during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -295,7 +295,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_create_reservation_error_date_to_already_taken(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Game is already reserved during this time$'):
             self.rental.create_reservation(
                 '8a85f066-bd8d-43df-b471-a6e708471c4c',
                 1,
@@ -312,7 +312,7 @@ class TestRentalUnittest(unittest.TestCase):
             ), version=4), uuid.UUID)
 
     def test_add_user_error_empty_name(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Names must not be empty$'):
             self.rental.add_user(
                 'Test',
                 '',
@@ -320,7 +320,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_add_user_error_wrong_name_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, '^Names must be strings$'):
             self.rental.add_user(
                 1,
                 'Testington',
@@ -328,7 +328,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_add_user_error_wrong_email_type(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaisesRegex(TypeError, '^Email must be a string$'):
             self.rental.add_user(
                 'Test',
                 'Testington',
@@ -336,7 +336,7 @@ class TestRentalUnittest(unittest.TestCase):
             )
 
     def test_add_user_error_email_invalid(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, '^Email is not valid$'):
             self.rental.add_user(
                 'Test',
                 'Testington',
