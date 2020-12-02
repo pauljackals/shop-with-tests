@@ -47,6 +47,14 @@ class TestStatsUnittest(unittest.TestCase):
         stats = Stats(self.database_original)
         self.assertEqual(stats.get_systems_total(), 3)
 
+    def test_get_games_total_in_system(self):
+        stats = Stats(self.database_original)
+        self.assertListEqual(stats.get_games_total_in_system(), [
+                {'id': 0, 'value': 2},
+                {'id': 1, 'value': 1},
+                {'id': 2, 'value': 1}
+        ])
+
     def tearDown(self):
         self.database_original = None
 
