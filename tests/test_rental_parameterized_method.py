@@ -18,22 +18,22 @@ class TestRentalParameterizedMethod(unittest.TestCase):
         self.assertEqual(self.rental.load_database(path), expected)
 
     @parameterized.expand([
-        ('no_file', 'test', FileNotFoundError),
-        ('wrong_type', 23, TypeError),
-        ('empty_name', '', ValueError)
+        ('no_file', 'test', FileNotFoundError, "Database doesn't exist"),
+        ('wrong_type', 23, TypeError, 'Database file name must be a string'),
+        ('empty_name', '', ValueError, 'Database file name must not be empty')
     ])
-    def test_load_database_error(self, name, path, expected):
-        with self.assertRaises(expected):
+    def test_load_database_error(self, name, path, expected, message):
+        with self.assertRaisesRegex(expected, '^' + message + '$'):
             self.rental.load_database(path)
 
     @parameterized.expand([
-        ('error_empty_name', 'Test', '', 'something@example.com', ValueError),
-        ('error_wrong_name_type', 1, 'Testington', 'something@example.com', TypeError),
-        ('error_wrong_email_type', 'Test', 'Testington', None, TypeError),
-        ('error_email_invalid', 'Test', 'Testington', 'somethingexample.com', ValueError)
+        ('error_empty_name', 'Test', '', 'something@example.com', ValueError, 'Names must not be empty'),
+        ('error_wrong_name_type', 1, 'Testington', 'something@example.com', TypeError, 'Names must be strings'),
+        ('error_wrong_email_type', 'Test', 'Testington', None, TypeError, 'Email must be a string'),
+        ('error_email_invalid', 'Test', 'Testington', 'somethingexample.com', ValueError, 'Email is not valid')
     ])
-    def test_load_user(self, name, firstname, lastname, email, error):
-        with self.assertRaises(error):
+    def test_load_user(self, name, firstname, lastname, email, error, message):
+        with self.assertRaisesRegex(error, '^' + message + '$'):
             self.rental.add_user(firstname, lastname, email)
 
     @parameterized.expand([
