@@ -16,13 +16,13 @@ class TestRentalPyHamcrest(unittest.TestCase):
         assert_that(self.rental.load_database('data/database_for_testing.json'), equal_to(True))
 
     def test_load_database_no_file(self):
-        assert_that(calling(self.rental.load_database).with_args('test'), raises(FileNotFoundError))
+        assert_that(calling(self.rental.load_database).with_args('test'), raises(FileNotFoundError, "^Database doesn't exist$"))
 
     def test_load_database_wrong_type(self):
-        assert_that(calling(self.rental.load_database).with_args(23), raises(TypeError))
+        assert_that(calling(self.rental.load_database).with_args(23), raises(TypeError, "^Database file name must be a string$"))
 
     def test_load_database_empty_name(self):
-        assert_that(calling(self.rental.load_database).with_args(''), raises(ValueError))
+        assert_that(calling(self.rental.load_database).with_args(''), raises(ValueError), "^Database file name must not be empty$")
 
     def test_save_database(self):
         assert_that(self.rental.save_database(), equal_to(True))
@@ -46,13 +46,13 @@ class TestRentalPyHamcrest(unittest.TestCase):
         assert_that(self.rental.get_user_reservations('2fe45694-eb13-4283-824e-cd6fb179bfcf'), contains_inanyorder(*reservations))
 
     def test_get_user_reservations_wrong_type(self):
-        assert_that(calling(self.rental.get_user_reservations).with_args(123), raises(TypeError))
+        assert_that(calling(self.rental.get_user_reservations).with_args(123), raises(TypeError, '^User ID must be a string$'))
 
     def test_get_user_reservations_empty(self):
-        assert_that(calling(self.rental.get_user_reservations).with_args(''), raises(ValueError))
+        assert_that(calling(self.rental.get_user_reservations).with_args(''), raises(ValueError, '^User ID must not be empty$'))
 
     def test_get_user_reservations_no_user(self):
-        assert_that(calling(self.rental.get_user_reservations).with_args('test'), raises(LookupError))
+        assert_that(calling(self.rental.get_user_reservations).with_args('test'), raises(LookupError, '^No such user$'))
 
     def test_create_reservation(self):
         assert_that(
@@ -73,7 +73,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '20d0-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Wrong date syntax$')
         )
 
     def test_create_reservation_wrong_date_to_non_digit(self):
@@ -84,7 +84,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '20d0-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Wrong date syntax$')
         )
 
     def test_create_reservation_wrong_date_from_wrong_day_in_month(self):
@@ -95,7 +95,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-11-31 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^No such day in provided month$')
         )
 
     def test_create_reservation_wrong_date_to_wrong_day_in_month(self):
@@ -106,7 +106,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2021-04-21 14:30',
                 '2021-04-31 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^No such day in provided month$')
         )
 
     def test_create_reservation_wrong_date_from_wrong_day_in_month_february_non_leap(self):
@@ -117,7 +117,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2021-02-29 14:30',
                 '2021-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^No such day in provided month$')
         )
 
     def test_create_reservation_wrong_date_to_wrong_day_in_month_february_non_leap(self):
@@ -128,7 +128,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2021-12-21 14:30',
                 '2021-02-29 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^No such day in provided month$')
         )
 
     def test_create_reservation_from_day_in_month_february_leap(self):
@@ -161,7 +161,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Wrong date syntax$')
         )
 
     def test_create_reservation_error_date_to_empty(self):
@@ -172,7 +172,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 ''
             ),
-            raises(ValueError)
+            raises(ValueError, '^Wrong date syntax$')
         )
 
     def test_create_reservation_wrong_user_type(self):
@@ -183,7 +183,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(TypeError)
+            raises(TypeError, '^User ID must be a string$')
         )
 
     def test_create_reservation_no_user(self):
@@ -194,7 +194,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(LookupError)
+            raises(LookupError, '^No such user$')
         )
 
     def test_create_reservation_error_wrong_game_type(self):
@@ -205,7 +205,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(TypeError)
+            raises(TypeError, '^Game ID must be an integer$')
         )
 
     def test_create_reservation_error_empty_user(self):
@@ -216,7 +216,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^User ID must not be empty$')
         )
 
     def test_create_reservation_error_no_game(self):
@@ -227,7 +227,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:00'
             ),
-            raises(LookupError)
+            raises(LookupError, '^No such game$')
         )
 
     def test_create_reservation_minute_error_date_from(self):
@@ -238,7 +238,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:29',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$')
         )
 
     def test_create_reservation_minute_error_date_to(self):
@@ -249,7 +249,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:01'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$')
         )
 
     def test_create_reservation_error_dates_switched(self):
@@ -260,7 +260,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-21 13:00',
                 '2020-12-19 14:30'
             ),
-            raises(ValueError)
+            raises(ValueError, '^End date must be later than start date$')
         )
 
     def test_create_reservation_error_date_from_closed_day(self):
@@ -271,7 +271,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-20 14:30',
                 '2020-12-22 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_to_closed_day(self):
@@ -282,7 +282,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-20 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_from_open_hours_before(self):
@@ -293,7 +293,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-18 08:30',
                 '2020-12-19 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_from_open_hours_after(self):
@@ -304,7 +304,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-18 21:00',
                 '2020-12-19 13:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_to_open_hours_before(self):
@@ -315,7 +315,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-18 14:30',
                 '2020-12-19 09:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_to_open_hours_after(self):
@@ -326,7 +326,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-18 14:00',
                 '2020-12-19 16:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Rental shop is closed during this time$')
         )
 
     def test_create_reservation_error_date_from_already_taken(self):
@@ -337,7 +337,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-15 13:30',
                 '2020-12-21 15:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Game is already reserved during this time$')
         )
 
     def test_create_reservation_error_date_to_already_taken(self):
@@ -348,7 +348,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-14 13:30',
                 '2020-12-16 15:00'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Game is already reserved during this time$')
         )
 
     def test_add_user(self):
@@ -368,7 +368,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '',
                 'something@example.com'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Names must not be empty$')
         )
 
     def test_add_user_error_wrong_name_type(self):
@@ -378,7 +378,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 'Testington',
                 'something@example.com'
             ),
-            raises(TypeError)
+            raises(TypeError, '^Names must be strings$')
         )
 
     def test_add_user_error_wrong_email_type(self):
@@ -388,7 +388,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 'Testington',
                 None
             ),
-            raises(TypeError)
+            raises(TypeError, '^Email must be a string$')
         )
 
     def test_add_user_error_email_invalid(self):
@@ -398,7 +398,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 'Testington',
                 'somethingexample.com'
             ),
-            raises(ValueError)
+            raises(ValueError, '^Email is not valid$')
         )
 
     def test_get_stats(self):
