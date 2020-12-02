@@ -401,40 +401,40 @@ class TestRentalPyHamcrest(unittest.TestCase):
             raises(ValueError, '^Email is not valid$')
         )
 
-    def test_get_stats(self):
-        assert_that(self.rental.get_stats(), equal_to(
-            {
-                'users_total': 2,
-                'games_total': 4,
-                'systems_total': 3,
-                'games_total_in_system': [
-                    {
-                        'id': 0,
-                        'value': 2
-                    },
-                    {
-                        'id': 1,
-                        'value': 1
-                    },
-                    {
-                        'id': 2,
-                        'value': 1
-                    }
-                ],
-                'total_hours_week': 35,
-                'games_dates_reserved': [
-                    {
-                        'id': 1,
-                        'dates': [
-                            {
-                                "from": "2020-12-15 13:00",
-                                "to": "2020-12-19 14:30"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ))
+    # def test_get_stats(self):
+    #     assert_that(self.rental.get_stats(), equal_to(
+    #         {
+    #             'users_total': 2,
+    #             'games_total': 4,
+    #             'systems_total': 3,
+    #             'games_total_in_system': [
+    #                 {
+    #                     'id': 0,
+    #                     'value': 2
+    #                 },
+    #                 {
+    #                     'id': 1,
+    #                     'value': 1
+    #                 },
+    #                 {
+    #                     'id': 2,
+    #                     'value': 1
+    #                 }
+    #             ],
+    #             'total_hours_week': 35,
+    #             'games_dates_reserved': [
+    #                 {
+    #                     'id': 1,
+    #                     'dates': [
+    #                         {
+    #                             "from": "2020-12-15 13:00",
+    #                             "to": "2020-12-19 14:30"
+    #                         }
+    #                     ]
+    #                 }
+    #             ]
+    #         }
+    #     ))
 
     def tearDown(self):
         self.rental = None
