@@ -32,6 +32,9 @@ class Stats:
                                          ))
         self._games_dates_reserved = games_dates_reserved
 
+    def get_users_total(self):
+        return self._users_total
+
     def get_all_stats(self):
         return {
             'users_total': self._users_total,
