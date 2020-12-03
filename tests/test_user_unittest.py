@@ -18,6 +18,9 @@ class TestUserUnittest(unittest.TestCase):
     def test_get_all_data(self):
         self.assertDictEqual(self.user.get_all_data(), self.data)
 
+    def test_get_id(self):
+        self.assertEqual(self.user.get_id(), self.data['id'])
+
     def tearDown(self):
         self.user = None
         self.data = None
