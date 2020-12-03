@@ -24,6 +24,9 @@ class TestUserUnittest(unittest.TestCase):
     def test_get_email(self):
         self.assertEqual(self.user.get_email(), self.data['email'])
 
+    def test_get_name_first(self):
+        self.assertEqual(self.user.get_name_first(), self.data['name']['first'])
+
     def tearDown(self):
         self.user = None
         self.data = None
