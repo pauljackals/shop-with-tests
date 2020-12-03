@@ -86,5 +86,16 @@
     },
     "error": "ValueError",
     "message": "Wrong date syntax"
+  },
+  {
+    "name": "wrong_user_type",
+    "data": {
+      "id_user": 34,
+      "id_game": 1,
+      "date_start": "2020-12-19 14:30",
+      "date_end": "2020-12-21 13:00"
+    },
+    "error": "TypeError",
+    "message": "User ID must be a string"
   }
 ]
