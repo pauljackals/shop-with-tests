@@ -20,5 +20,16 @@
     },
     "error": "ValueError",
     "message": "Wrong date syntax"
+  },
+  {
+    "name": "wrong_date_from_wrong_day_in_month",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": 1,
+      "date_start": "2020-11-31 14:30",
+      "date_end": "2020-12-21 13:00"
+    },
+    "error": "ValueError",
+    "message": "No such day in provided month"
   }
 ]
