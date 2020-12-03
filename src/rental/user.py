@@ -13,3 +13,6 @@ class User:
 
     def get_id(self):
         return self._id
+
+    def get_email(self):
+        return self._email
