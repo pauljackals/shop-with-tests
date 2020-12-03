@@ -3,14 +3,15 @@ from hamcrest import *
 from rental.rental import Rental
 import uuid
 import json
+import copy
 
 
 class TestRentalPyHamcrest(unittest.TestCase):
     def setUp(self):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
+        self.database_for_checking = copy.deepcopy(database)
         self.rental = Rental(database)
-        self.database_original = database
 
     def test_load_database(self):
         assert_that(self.rental.load_database('data/database_for_testing.json'), equal_to(True))
@@ -31,7 +32,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
         self.rental.save_database()
         with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
-        assert_that(self.database_original, equal_to(database_copy))
+        assert_that(self.database_for_checking, equal_to(database_copy))
 
     def test_get_user_reservations(self):
         reservations = [
@@ -403,7 +404,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
 
     def tearDown(self):
         self.rental = None
-        self.database_original = None
+        self.database_for_checking = None
 
 
 if __name__ == '__main__':

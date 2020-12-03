@@ -3,14 +3,15 @@ import json
 from rental.rental import Rental
 from rental.stats import Stats
 import uuid
+import copy
 
 
 class TestRentalUnittest(unittest.TestCase):
     def setUp(self):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
+        self.database_for_checking = copy.deepcopy(database)
         self.rental = Rental(database)
-        self.database_original = database
 
     def test_load_database(self):
         self.assertTrue(self.rental.load_database('data/database_for_testing.json'))
@@ -34,7 +35,7 @@ class TestRentalUnittest(unittest.TestCase):
         self.rental.save_database()
         with open('src/rental/database_copy.json') as file:
             database_copy = json.loads(file.read())
-        self.assertDictEqual(self.database_original, database_copy)
+        self.assertDictEqual(self.database_for_checking, database_copy)
 
     def test_get_user_reservations(self):
         reservations = [
@@ -349,7 +350,7 @@ class TestRentalUnittest(unittest.TestCase):
 
     def tearDown(self):
         self.rental = None
-        self.database_original = None
+        self.database_for_checking = None
 
 
 if __name__ == '__main__':
