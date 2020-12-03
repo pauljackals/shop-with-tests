@@ -108,5 +108,16 @@
     },
     "error": "LookupError",
     "message": "No such user"
+  },
+  {
+    "name": "error_wrong_game_type",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": "1",
+      "date_start": "2020-12-19 14:30",
+      "date_end": "2020-12-21 13:00"
+    },
+    "error": "TypeError",
+    "message": "Game ID must be an integer"
   }
 ]
