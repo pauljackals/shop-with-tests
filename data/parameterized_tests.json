@@ -75,5 +75,16 @@
     },
     "error": "ValueError",
     "message": "Wrong date syntax"
+  },
+  {
+    "name": "error_date_to_empty",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": 1,
+      "date_start": "2020-12-19 14:30",
+      "date_end": ""
+    },
+    "error": "ValueError",
+    "message": "Wrong date syntax"
   }
 ]
