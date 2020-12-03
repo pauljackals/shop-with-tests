@@ -130,5 +130,16 @@
     },
     "error": "ValueError",
     "message": "User ID must not be empty"
+  },
+  {
+    "name": "error_no_game",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": 999,
+      "date_start": "2020-12-19 14:30",
+      "date_end": "2020-12-21 13:00"
+    },
+    "error": "LookupError",
+    "message": "No such game"
   }
 ]
