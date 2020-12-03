@@ -10,3 +10,6 @@ class User:
             'email': self._email,
             'name': self._name
         }
+
+    def get_id(self):
+        return self._id
