@@ -16,3 +16,6 @@ class User:
 
     def get_email(self):
         return self._email
+
+    def get_name_first(self):
+        return self._name['first']
