@@ -28,7 +28,7 @@ class TestUserUnittest(unittest.TestCase):
         self.assertEqual(self.user.get_name_first(), self.data['name']['first'])
 
     def test_get_name_last(self):
-        self.assertEqual(self.user.get_name_first(), self.data['name']['last'])
+        self.assertEqual(self.user.get_name_last(), self.data['name']['last'])
 
     def tearDown(self):
         self.user = None
