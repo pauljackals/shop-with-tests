@@ -4,12 +4,15 @@ import uuid
 import re
 import datetime
 from rental.stats import Stats
+from rental.user import User
+import copy
 
 
 class Rental:
     def __init__(self, database=None):
         if database:
             self._database = database
+            self._database['users'] = list(map(lambda user: User(user), database['users']))
         else:
             self._database = {}
 
@@ -22,11 +25,14 @@ class Rental:
             raise FileNotFoundError("Database doesn't exist")
         with open(database_file) as file:
             self._database = json.loads(file.read())
+        self._database['users'] = list(map(lambda user: User(user), self._database['users']))
         return True
 
     def save_database(self):
+        database_to_save = copy.deepcopy(self._database)
+        database_to_save['users'] = list(map(lambda user: user.get_all_data(), database_to_save['users']))
         with open('src/rental/database_copy.json', 'w') as file:
-            file.write(json.dumps(self._database))
+            file.write(json.dumps(database_to_save))
         return True
 
     def get_user_reservations(self, id_user):
@@ -34,7 +40,7 @@ class Rental:
             raise TypeError('User ID must be a string')
         if id_user == '':
             raise ValueError('User ID must not be empty')
-        if id_user not in map(lambda user: user['id'], self._database['users']):
+        if id_user not in map(lambda user: user.get_id(), self._database['users']):
             raise LookupError('No such user')
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
 
@@ -54,7 +60,7 @@ class Rental:
             raise TypeError('User ID must be a string')
         if user_id == '':
             raise ValueError('User ID must not be empty')
-        if user_id not in map(lambda user: user['id'], self._database['users']):
+        if user_id not in map(lambda user: user.get_id(), self._database['users']):
             raise LookupError('No such user')
         if type(game_id) != int:
             raise TypeError('Game ID must be an integer')
@@ -107,7 +113,7 @@ class Rental:
         if not re.search(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
             raise ValueError('Email is not valid')
         new_user_id = str(uuid.uuid4())
-        self._database['users'].append(
+        self._database['users'].append(User(
             {
                 'id': new_user_id,
                 'email': email,
@@ -116,7 +122,7 @@ class Rental:
                     'last': lastname
                 }
             }
-        )
+        ))
         return new_user_id
 
     def get_stats(self):
