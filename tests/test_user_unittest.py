@@ -21,6 +21,9 @@ class TestUserUnittest(unittest.TestCase):
     def test_get_id(self):
         self.assertEqual(self.user.get_id(), self.data['id'])
 
+    def test_get_email(self):
+        self.assertEqual(self.user.get_email(), self.data['email'])
+
     def tearDown(self):
         self.user = None
         self.data = None
