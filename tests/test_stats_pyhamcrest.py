@@ -1,6 +1,6 @@
 import unittest
 from hamcrest import *
-from rental.stats import Stats
+from src.rental.stats import Stats
 import json
 
 

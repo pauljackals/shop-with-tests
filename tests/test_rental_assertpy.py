@@ -1,6 +1,6 @@
 import unittest
 from assertpy import assert_that
-from rental.rental import Rental
+from src.rental.rental import Rental
 import uuid
 import json
 import copy

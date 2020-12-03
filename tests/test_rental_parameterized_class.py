@@ -1,7 +1,7 @@
 import unittest
 from parameterized import parameterized_class
 import json
-from rental.rental import Rental
+from src.rental.rental import Rental
 
 
 @parameterized_class(

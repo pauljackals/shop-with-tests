@@ -1,6 +1,6 @@
 import unittest
 import json
-from rental.rental import Rental
+from src.rental.rental import Rental
 
 
 class TestRentalParameterizedFile(unittest.TestCase):

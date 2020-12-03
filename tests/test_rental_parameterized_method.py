@@ -1,7 +1,7 @@
 import unittest
 from parameterized import parameterized
 import json
-from rental.rental import Rental
+from src.rental.rental import Rental
 import uuid
 
 

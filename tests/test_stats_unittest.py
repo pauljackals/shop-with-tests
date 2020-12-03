@@ -1,6 +1,6 @@
 import unittest
 import json
-from rental.stats import Stats
+from src.rental.stats import Stats
 
 
 class TestStatsUnittest(unittest.TestCase):

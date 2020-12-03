@@ -1,5 +1,5 @@
 import unittest
-from rental.stats import Stats
+from src.rental.stats import Stats
 from assertpy import assert_that
 import json
 

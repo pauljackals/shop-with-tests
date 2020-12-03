@@ -1,7 +1,7 @@
 import unittest
 import json
-from rental.rental import Rental
-from rental.stats import Stats
+from src.rental.rental import Rental
+from src.rental.stats import Stats
 import uuid
 import copy
 

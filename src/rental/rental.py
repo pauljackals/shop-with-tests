@@ -3,9 +3,9 @@ import os
 import uuid
 import re
 import datetime
-from rental.stats import Stats
-from rental.user import User
 import copy
+from .stats import Stats
+from .user import User
 
 
 class Rental:

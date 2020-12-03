@@ -1,5 +1,5 @@
 import unittest
-from rental.user import User
+from src.rental.user import User
 
 
 class TestUserUnittest(unittest.TestCase):
