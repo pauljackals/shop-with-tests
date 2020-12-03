@@ -119,5 +119,16 @@
     },
     "error": "TypeError",
     "message": "Game ID must be an integer"
+  },
+  {
+    "name": "error_empty_user",
+    "data": {
+      "id_user": "",
+      "id_game": 1,
+      "date_start": "2020-12-19 14:30",
+      "date_end": "2020-12-21 13:00"
+    },
+    "error": "ValueError",
+    "message": "User ID must not be empty"
   }
 ]
