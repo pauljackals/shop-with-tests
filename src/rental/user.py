@@ -22,3 +22,6 @@ class User:
 
     def get_name_last(self):
         return self._name['last']
+
+    def get_name_full(self):
+        return self._name['first'] + ' ' + self._name['last']
