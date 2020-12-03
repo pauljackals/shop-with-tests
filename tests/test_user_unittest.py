@@ -30,6 +30,9 @@ class TestUserUnittest(unittest.TestCase):
     def test_get_name_last(self):
         self.assertEqual(self.user.get_name_last(), self.data['name']['last'])
 
+    def test_get_name_full(self):
+        self.assertEqual(self.user.get_name_full(), self.data['name']['first'] + ' ' + self.data['name']['last'])
+
     def tearDown(self):
         self.user = None
         self.data = None
