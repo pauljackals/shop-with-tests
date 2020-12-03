@@ -16,7 +16,7 @@ class TestRentalParameterizedFile(unittest.TestCase):
             data = test['data']
             error_string = test['error']
             error = None
-            for error_check in [ValueError, TypeError]:
+            for error_check in [ValueError, TypeError, LookupError]:
                 if error_check.__name__ == error_string:
                     error = error_check
 
