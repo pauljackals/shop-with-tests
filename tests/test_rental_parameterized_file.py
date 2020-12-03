@@ -16,8 +16,9 @@ class TestRentalParameterizedFile(unittest.TestCase):
             data = test['data']
             error_string = test['error']
             error = None
-            if error_string == 'ValueError':
-                error = ValueError
+            for error_check in [ValueError, TypeError]:
+                if error_check.__name__ == error_string:
+                    error = error_check
 
             with self.assertRaisesRegex(error, '^' + test['message'] + '$'):
                 rental.create_reservation(data['id_user'], data['id_game'], data['date_start'], data['date_end'])
