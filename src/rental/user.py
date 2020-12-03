@@ -19,3 +19,6 @@ class User:
 
     def get_name_first(self):
         return self._name['first']
+
+    def get_name_last(self):
+        return self._name['last']
