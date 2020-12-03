@@ -14,6 +14,8 @@ class TestRentalParameterizedFile(unittest.TestCase):
             rental = Rental(database)
 
             data = test['data']
+            for char in ['(', ')']:
+                test['message'] = test['message'].replace(char, '\\'+char)
             error_string = test['error']
             error = None
             for error_check in [ValueError, TypeError, LookupError]:
