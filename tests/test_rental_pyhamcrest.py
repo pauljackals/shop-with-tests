@@ -1,6 +1,6 @@
 import unittest
 from hamcrest import *
-from rental.rental import Rental
+from src.rental.rental import Rental
 import uuid
 import json
 import copy
@@ -239,7 +239,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:29',
                 '2020-12-21 13:00'
             ),
-            raises(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$')
+            raises(ValueError, '^Both dates must be rounded to full hours or half \\(:00/:30\\)$')
         )
 
     def test_create_reservation_minute_error_date_to(self):
@@ -250,7 +250,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-19 14:30',
                 '2020-12-21 13:01'
             ),
-            raises(ValueError, '^Both dates must be rounded to full hours or half \(:00/:30\)$')
+            raises(ValueError, '^Both dates must be rounded to full hours or half \\(:00/:30\\)$')
         )
 
     def test_create_reservation_error_dates_switched(self):
