@@ -9,5 +9,16 @@
     },
     "error": "ValueError",
     "message": "Wrong date syntax"
+  },
+  {
+    "name": "wrong_date_to_non_digit",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": 1,
+      "date_start": "2020-12-19 14:30",
+      "date_end": "20d0-12-21 13:00"
+    },
+    "error": "ValueError",
+    "message": "Wrong date syntax"
   }
 ]
