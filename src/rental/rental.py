@@ -9,12 +9,13 @@ from .user import User
 
 
 class Rental:
-    def __init__(self, database=None):
+    def __init__(self, database=None, datetime_current=None):
         if database:
             self._database = database
             self._database['users'] = list(map(lambda user: User(user), database['users']))
         else:
             self._database = {}
+        self._datetime_current = datetime_current
 
     def load_database(self, database_file='database.json'):
         if type(database_file) != str:
@@ -72,6 +73,9 @@ class Rental:
             raise ValueError('Both dates must be rounded to full hours or half (:00/:30)')
         if (date_time_to - date_time_from).total_seconds() <= 0:
             raise ValueError('End date must be later than start date')
+        datetime_current = self._datetime_current is None and datetime.datetime.now() or self._datetime_current
+        if (date_time_from - datetime_current).total_seconds() < 0 or (date_time_to - datetime_current).total_seconds() <= 0:
+            raise ValueError('Both dates must not be in the past')
 
         weekday_from, weekday_to = map(lambda date_time: self._database['open_hours'][date_time.weekday()], [date_time_from, date_time_to])
 
