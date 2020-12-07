@@ -46,17 +46,6 @@ class Rental:
         return list(filter(lambda reservation: reservation['user'] == id_user, self._database['reservations']))
 
     def create_reservation(self, user_id, game_id, date_time_from_string, date_time_to_string):
-        for date_time_string in [date_time_from_string, date_time_to_string]:
-            if not re.search('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) ([0-1][0-9]|2[0-3]):[0-5][0-9]$', date_time_string):
-                raise ValueError('Wrong date syntax')
-            year_string, month_string, day_string = date_time_string.split(' ')[0].split('-')
-            leap_modifier = 0
-            if (int(year_string) % 400 == 0) or ((int(year_string) % 4 == 0) and (int(year_string) % 100 != 0)):
-                leap_modifier += 1
-            if month_string == '02' and int(day_string) > (28 + leap_modifier)\
-                    or month_string in ['04', '06', '09', '11'] and day_string == '31':
-                raise ValueError('No such day in provided month')
-
         if type(user_id) != str:
             raise TypeError('User ID must be a string')
         if user_id == '':
@@ -67,6 +56,17 @@ class Rental:
             raise TypeError('Game ID must be an integer')
         if game_id not in map(lambda game: game['id'], self._database['games']):
             raise LookupError('No such game')
+
+        for date_time_string in [date_time_from_string, date_time_to_string]:
+            if not re.search('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) ([0-1][0-9]|2[0-3]):[0-5][0-9]$', date_time_string):
+                raise ValueError('Wrong date syntax')
+            year_string, month_string, day_string = date_time_string.split(' ')[0].split('-')
+            leap_modifier = 0
+            if (int(year_string) % 400 == 0) or ((int(year_string) % 4 == 0) and (int(year_string) % 100 != 0)):
+                leap_modifier += 1
+            if month_string == '02' and int(day_string) > (28 + leap_modifier)\
+                    or month_string in ['04', '06', '09', '11'] and day_string == '31':
+                raise ValueError('No such day in provided month')
 
         date_time_from, date_time_to = map(lambda date_time_string: datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M'), [date_time_from_string, date_time_to_string])
         if date_time_from.minute % 30 != 0 or date_time_to.minute % 30 != 0:
