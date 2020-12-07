@@ -3,3 +3,4 @@ setuptools~=50.3.2
 parameterized~=0.7.4
 pyhamcrest
 pytest~=6.1.2
+nose
