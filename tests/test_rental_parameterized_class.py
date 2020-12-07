@@ -2,6 +2,7 @@ import unittest
 from parameterized import parameterized_class
 import json
 from src.rental.rental import Rental
+import datetime
 
 
 @parameterized_class(
@@ -59,14 +60,20 @@ from src.rental.rental import Rental
             1,
             '2020-12-14 13:30',
             '2020-12-16 15:00'
-        ), ValueError, 'Game is already reserved during this time')
+        ), ValueError, 'Game is already reserved during this time'),
+        ('wrong_date_before_now', (
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2020-11-28 14:30',
+                '2020-12-01 13:00'
+        ), ValueError, 'Both dates must not be in the past')
     ]
 )
 class TestRentalParameterizedClass(unittest.TestCase):
     def setUp(self):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
-        self.rental = Rental(database)
+        self.rental = Rental(database, datetime.datetime(year=2020, month=12, day=2, hour=14, minute=17))
 
     def test_create_reservation(self):
         with self.assertRaisesRegex(self.error, '^' + self.message + '$'):

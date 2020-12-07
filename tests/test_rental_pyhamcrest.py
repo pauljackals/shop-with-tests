@@ -4,6 +4,7 @@ from src.rental.rental import Rental
 import uuid
 import json
 import copy
+import datetime
 
 
 class TestRentalPyHamcrest(unittest.TestCase):
@@ -11,7 +12,7 @@ class TestRentalPyHamcrest(unittest.TestCase):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
         self.database_for_checking = copy.deepcopy(database)
-        self.rental = Rental(database)
+        self.rental = Rental(database, datetime.datetime(year=2020, month=12, day=2, hour=14, minute=17))
 
     def test_load_database(self):
         assert_that(self.rental.load_database('data/database_for_testing.json'), equal_to(True))
@@ -350,6 +351,17 @@ class TestRentalPyHamcrest(unittest.TestCase):
                 '2020-12-16 15:00'
             ),
             raises(ValueError, '^Game is already reserved during this time$')
+        )
+
+    def test_create_reservation_wrong_date_before_now(self):
+        assert_that(
+            calling(self.rental.create_reservation).with_args(
+                '8a85f066-bd8d-43df-b471-a6e708471c4c',
+                1,
+                '2020-11-28 14:30',
+                '2020-12-01 13:00'
+            ),
+            raises(ValueError, '^Both dates must not be in the past$')
         )
 
     def test_add_user(self):

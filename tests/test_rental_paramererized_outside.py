@@ -3,6 +3,7 @@ from assertpy import assert_that
 from parameterized import parameterized
 import json
 from src.rental.rental import Rental
+import datetime
 
 
 @pytest.mark.skip
@@ -96,10 +97,16 @@ from src.rental.rental import Rental
             1,
             '2020-12-19 14:30',
             '2020-12-21 13:01'
-    ), ValueError, 'Both dates must be rounded to full hours or half (:00/:30)')
+    ), ValueError, 'Both dates must be rounded to full hours or half (:00/:30)'),
+    ('wrong_date_before_now', (
+            '8a85f066-bd8d-43df-b471-a6e708471c4c',
+            1,
+            '2020-11-28 14:30',
+            '2020-12-01 13:00'
+    ), ValueError, 'Both dates must not be in the past')
 ])
 def test_parameterized_create_reservation(name, data, error, message):
     with open('data/database_for_testing.json') as file:
         database = json.loads(file.read())
-    rental = Rental(database)
+    rental = Rental(database, datetime.datetime(year=2020, month=12, day=2, hour=14, minute=17))
     assert_that(rental.create_reservation).raises(error).when_called_with(*data).is_equal_to(message)

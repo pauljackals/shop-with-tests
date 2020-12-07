@@ -1,6 +1,7 @@
 import unittest
 import json
 from src.rental.rental import Rental
+import datetime
 
 
 class TestRentalParameterizedFile(unittest.TestCase):
@@ -11,7 +12,7 @@ class TestRentalParameterizedFile(unittest.TestCase):
         for test in tests:
             with open('data/database_for_testing.json') as file:
                 database = json.loads(file.read())
-            rental = Rental(database)
+            rental = Rental(database, datetime.datetime(year=2020, month=12, day=2, hour=14, minute=17))
 
             data = test['data']
             for char in ['(', ')']:

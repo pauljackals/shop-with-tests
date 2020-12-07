@@ -3,13 +3,14 @@ from parameterized import parameterized
 import json
 from src.rental.rental import Rental
 import uuid
+import datetime
 
 
 class TestRentalParameterizedMethod(unittest.TestCase):
     def setUp(self):
         with open('data/database_for_testing.json') as file:
             database = json.loads(file.read())
-        self.rental = Rental(database)
+        self.rental = Rental(database, datetime.datetime(year=2020, month=12, day=2, hour=14, minute=17))
 
     @parameterized.expand([
         ('data/database_for_testing.json', True)

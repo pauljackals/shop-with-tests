@@ -163,5 +163,16 @@
     },
     "error": "ValueError",
     "message": "Both dates must be rounded to full hours or half (:00/:30)"
+  },
+  {
+    "name": "wrong_date_before_now",
+    "data": {
+      "id_user": "8a85f066-bd8d-43df-b471-a6e708471c4c",
+      "id_game": 1,
+      "date_start": "2020-11-28 14:30",
+      "date_end": "2020-12-01 13:00"
+    },
+    "error": "ValueError",
+    "message": "Both dates must not be in the past"
   }
 ]
