@@ -14,3 +14,4 @@ __pycache__/
 /.idea/
 /src/rental/database_copy.json
 .eggs/
+/venv/
